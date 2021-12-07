@@ -1,0 +1,15 @@
+{
+  "name": "requestinvite-function",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:uoprepos/RequestInvite.git",
+  "author": "Nathan Tamez <25773848+NatoNathan@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^2.1.0"
+  },
+  "scripts": {
+	"start": "npx functions-framework --target=requestinvite "
+  }
+  
+}
