@@ -2,20 +2,29 @@
   "name": "request-invite",
   "version": "0.1.0",
   "private": true,
+  "homepage": "uoprepos.github.io/request-invite",
   "dependencies": {
+    "@craco/craco": "^6.4.2",
+    "@octokit/auth-app": "^3.6.1",
+    "@octokit/auth-token": "^2.5.0",
+    "@octokit/rest": "^18.12.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev:functions": "npx functions-framework --target=requestinvite",
+    "dev:site": "craco start",
+    "dev": "yarn dev:site && yarn dev:functions",
+    "build:site": "craco build",
+    "test:site": "craco test",
+    "predeploy": "yarn build:site",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -36,6 +45,9 @@
     ]
   },
   "devDependencies": {
-    "@google-cloud/functions-framework": "^2.1.0"
+    "@google-cloud/functions-framework": "^2.1.0",
+    "autoprefixer": "^9",
+    "postcss": "^7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }
