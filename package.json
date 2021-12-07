@@ -11,20 +11,23 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "env-cmd": "^10.1.0",
     "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.21.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "dev:functions": "npx functions-framework --target=requestinvite",
+    "dev:functions": "env-cmd -f .env.development.local npx functions-framework --target=requestinvite",
     "dev:site": "craco start",
-    "dev": "yarn dev:site && yarn dev:functions",
     "build:site": "craco build",
     "test:site": "craco test",
-    "predeploy": "yarn build:site",
-    "deploy": "gh-pages -d build"
+    "predeploy:site": "yarn build:site",
+    "deploy:site": "gh-pages -d build",
+    "deploy:functions": "gcloud functions deploy requestinvite --runtime nodejs16 --trigger-http --allow-unauthenticated",
+    "deploy": "yarn deploy:site && yarn deploy:functions"
   },
   "eslintConfig": {
     "extends": [

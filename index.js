@@ -8,12 +8,28 @@ const { Octokit } = require("@octokit/rest");
  *                     More info: https://expressjs.com/en/api.html#res
  */
 exports.requestinvite = (req, res) => {
+
+	console.log(process.env.GITHUB_TOKEN);
+	console.log(process.env.GITHUB_ORG);
+
+	if (process.env.NODE_ENV !== "production") {
+		res.set('Access-Control-Allow-Origin', '*');
+	}
+	if (req.method === 'OPTIONS') {
+		// Send response to OPTIONS requests
+		res.set('Access-Control-Allow-Methods', 'POST');
+		res.set('Access-Control-Allow-Headers', 'Content-Type');
+		res.set('Access-Control-Max-Age', '3600');
+		res.status(204).send('');
+	}
+
 	const octokit = new Octokit({
 		auth: process.env.GITHUB_TOKEN,
 	}
 	);
 
 	const email = req.body.email;
+	console.log(email);
 
 	// Clean up the email
 	const email_clean = email.toLowerCase().trim();
@@ -32,10 +48,13 @@ exports.requestinvite = (req, res) => {
 			org: process.env.GITHUB_ORG,
 			email: email_clean,
 		}).then(() => {
-				res.status(200).send('Invite sent');
-			}
+			res.status(200).send('Invite sent');
+		}
 		).catch(err => {
-				res.status(500).send('Invite failed');
+			res.status(500).send({
+				error: err,
+				message: 'Error sending invite',
+			});
 		});
 	} else {
 		res.status(400).send('Invalid email');
