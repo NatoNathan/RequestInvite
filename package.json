@@ -20,13 +20,13 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "dev:functions": "env-cmd -f .env.development.local npx functions-framework --target=requestinvite",
+    "dev:cloud": "env-cmd -f .env.development.local npx functions-framework --target=requestinvite",
     "dev:site": "craco start",
     "build:site": "craco build",
     "test:site": "craco test",
     "predeploy:site": "yarn build:site",
     "deploy:site": "gh-pages -d build",
-    "deploy:functions": "gcloud functions deploy requestinvite --runtime nodejs16 --trigger-http --allow-unauthenticated",
+    "deploy:cloud": "gcloud functions deploy requestinvite --runtime nodejs16 --trigger-http --env-vars-file .env.production.yaml --allow-unauthenticated",
     "deploy": "yarn deploy:site && yarn deploy:functions"
   },
   "eslintConfig": {
