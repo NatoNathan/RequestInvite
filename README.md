@@ -15,7 +15,7 @@ Simple site for UoP staff and Students to Request an invitation to the UoP Repos
 
   1. Clone the repo
   2. Run `yarn install` or `npm install`
-  3. Run `echo "GITHUB_ORG=SOME_ORG \nGITHUB_TOKEN=GH_PAT" > .env.development.local`
+  3. Run `"GITHUB_ORG=SOME_ORG \nGITHUB_TOKEN=GH_PAT" > .env.development.local`
   4. Update `.env.development.local` with your GitHub organisation and token (Use a token with the `org` scope). You may need to make a org for testing purposes.
   5. Run `yarn dev:cloud or npm run dev:cloud` to serve cloud functions locally (you will need to restart the server after every change)
   6. Run
@@ -44,10 +44,16 @@ If you would prefer to use Google cloud Secret Manager instead of the default co
           ~ » cd ~/git/github/uoprepos/
       ```
 
-  3. Run `echo "GITHUB_ORG=SOME_ORG \nGITHUB_TOKEN=GH_PAT" > .env.production.yaml`
-  4. Update `.env.production.yaml` with your GitHub organisation and token (Use a token with the `org` scope)
-  5. Run `yarn install` or `npm install` to update dependencies
-  6. Run `yarn deploy:cloud`or `npm run deploy:cloud` to deploy the cloud functions
+  3. Add to .env.production.yaml
+    
+    ```yaml
+    GITHUB_ORG: "SOME_ORG"
+    GITHUB_TOKEN: "GH_PAT" 
+    ```
+    
+  5. Update `.env.production.yaml` with your GitHub organisation and token (Use a token with the `org` scope)
+  6. Run `yarn install` or `npm install` to update dependencies
+  7. Run `yarn deploy:cloud`or `npm run deploy:cloud` to deploy the cloud functions
 
 **Website**:
 
